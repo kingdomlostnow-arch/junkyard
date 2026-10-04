@@ -119,7 +119,7 @@ $add = function (array $article, array $image, array $sources) use (&$new, &$new
 if ($firecrawl !== null) {
     try {
         $recent = $pdo->query('SELECT title FROM topic_history ORDER BY id DESC LIMIT 100')->fetchAll(PDO::FETCH_COLUMN);
-        $topics = $ai->proposeTopics($count + 3, $cfg['topic_mode'] ?? 'mixed', $recent, $today->format('Y-m-d'));
+        $topics = array_slice($ai->proposeTopics($count, $cfg['topic_mode'] ?? 'mixed', $recent, $today->format('Y-m-d')), 0, $count);
         logLine(count($topics) . ' topic ideas from DeepSeek.');
     } catch (Throwable $ex) {
         logLine('Could not get topic ideas: ' . $ex->getMessage());
