@@ -13,9 +13,11 @@ function config(): array
             exit("Missing config.php — copy config.example.php to config.php and edit it.\n");
         }
         $config = require $file;
-        $envKey = getenv('DEEPSEEK_API_KEY');
-        if ($envKey !== false && $envKey !== '') {
-            $config['deepseek']['api_key'] = $envKey;
+        foreach (['DEEPSEEK_API_KEY' => 'deepseek', 'FIRECRAWL_API_KEY' => 'firecrawl'] as $env => $service) {
+            $key = getenv($env);
+            if ($key !== false && $key !== '') {
+                $config[$service]['api_key'] = $key;
+            }
         }
         date_default_timezone_set($config['timezone'] ?? 'UTC');
     }

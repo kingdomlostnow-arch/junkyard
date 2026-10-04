@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function layoutStart(string $title, string $description = ''): void
+function layoutStart(string $title, string $description = '', string $bodyClass = ''): void
 {
     $site = config()['site_name'];
     ?>
@@ -17,7 +17,7 @@ function layoutStart(string $title, string $description = ''): void
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Bungee&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="<?= e($bodyClass) ?>">
 <header class="site-header">
     <a class="logo" href="./" dir="ltr">for<span>sure</span>its<em>crazy</em></a>
     <p class="tagline">خمس قصص حقيقية… لا تُصدَّق. تتجدد كل يوم عند منتصف الليل.</p>
@@ -33,7 +33,7 @@ function layoutEnd(): void
 </main>
 <footer class="site-footer">
     <div class="countdown">القصص الجديدة بعد <strong id="countdown" data-target="<?= $midnight ?>">--:--:--</strong></div>
-    <p>المصادر والصور: ويكيبيديا وويكيميديا كومنز · النصوص مكتوبة بالذكاء الاصطناعي (DeepSeek)</p>
+    <p>قصص حقيقية يجمعها ويكتبها الذكاء الاصطناعي من مصادر على الإنترنت · راجع روابط المصادر أسفل كل قصة</p>
 </footer>
 <script>
 (function () {

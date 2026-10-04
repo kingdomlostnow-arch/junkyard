@@ -6,7 +6,7 @@ require __DIR__ . '/_layout.php';
 
 $events = db()->query('SELECT * FROM events ORDER BY sort_order')->fetchAll();
 
-layoutStart(config()['site_name'] . ' — قصص اليوم', 'خمس أحداث حقيقية مجنونة من التاريخ، تتجدد يومياً.');
+layoutStart(config()['site_name'] . ' — قصص اليوم', 'خمس قصص حقيقية مجنونة، تتجدد يومياً.');
 ?>
 <?php if (!$events): ?>
     <section class="empty">
@@ -17,10 +17,11 @@ layoutStart(config()['site_name'] . ' — قصص اليوم', 'خمس أحداث
     <h1 class="day-title">قصص يوم <?= e(date('j/n/Y', strtotime($events[0]['batch_date']))) ?></h1>
     <section class="grid">
         <?php foreach ($events as $i => $ev): ?>
-            <a class="card<?= $i === 0 ? ' card--hero' : '' ?>" href="event.php?id=<?= (int) $ev['id'] ?>">
+            <a class="card theme-<?= e($ev['theme']) ?><?= $i === 0 ? ' card--hero' : '' ?>" href="event.php?id=<?= (int) $ev['id'] ?>">
                 <div class="card__img">
                     <img src="<?= e($ev['image_path']) ?>" alt="<?= e($ev['title']) ?>" loading="<?= $i === 0 ? 'eager' : 'lazy' ?>">
                     <span class="card__num">#<?= $i + 1 ?></span>
+                    <?php if ($ev['emoji']): ?><span class="card__emoji"><?= e($ev['emoji']) ?></span><?php endif; ?>
                 </div>
                 <div class="card__body">
                     <div class="meta">
