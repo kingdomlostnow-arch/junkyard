@@ -1,0 +1,5 @@
+config.php
+storage/*
+!storage/.gitkeep
+public/images/events/*
+!public/images/events/.gitkeep
